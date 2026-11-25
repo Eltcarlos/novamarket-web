@@ -2,6 +2,7 @@ import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { BatchSpanProcessor, SimpleSpanProcessor, TraceIdRatioBasedSampler } from "@opentelemetry/sdk-trace-base";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
+import { getRegion } from "../lib/region";
 import { CloudLoggingSpanExporter } from "./cloud-logging-exporter";
 
 function sampleRatio(): number {
@@ -21,7 +22,7 @@ export function startTelemetry() {
     resource: resourceFromAttributes({
       "service.name": process.env.K_SERVICE ?? "novamarket-web",
       "service.version": process.env.K_REVISION ?? "local",
-      "cloud.region": process.env.REGION ?? "local",
+      "cloud.region": getRegion(),
     }),
     // No usa el "sampled" entrante: Cloud Run muestrea muy pocas peticiones.
     // El ratio por trace ID da la misma decision en todos los servicios.

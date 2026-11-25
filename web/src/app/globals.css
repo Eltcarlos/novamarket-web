@@ -1,0 +1,58 @@
+:root {
+  --paper: #fbf6ec; --ink: #17231f; --muted: #5c6a63; --card: #fffdf8; --line: #e4dccb;
+  --green: #0b5d4b; --coral: #e4572e; --sun: #f2b134; --sky: #2a7f9e;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #101916; --ink: #f3eee2; --muted: #a3b0a9; --card: #18241f; --line: #2b3a33; --green: #5fc9ab; --coral: #ff8260; --sky: #6fc0dd; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+
+/* Franja tejida: guiño a los textiles de la region */
+.weave { height: 14px; background: repeating-linear-gradient(90deg, #e4572e 0 22px, #f2b134 22px 34px, #0b5d4b 34px 62px, #fbf6ec 62px 68px, #2a7f9e 68px 92px, #f2b134 92px 98px); }
+
+header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.4rem; }
+.brand { font-weight: 800; font-size: 1.2rem; letter-spacing: -.02em; text-decoration: none; }
+.brand span { color: var(--coral); }
+header nav { font-size: .95rem; color: var(--muted); }
+
+.hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 3.5rem; align-items: center; padding-block: 3.5rem 4.5rem; }
+h1 { font-size: clamp(2.5rem, 6.2vw, 4.5rem); line-height: 1.02; letter-spacing: -.045em; margin: 0 0 1.3rem; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--coral); }
+.lead { font-size: 1.18rem; color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
+.btn { display: inline-block; padding: .85rem 1.5rem; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 650; }
+.btn:hover { background: var(--coral); }
+
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 1.8rem; box-shadow: 0 24px 50px -32px rgb(23 35 31 / .5); }
+.panel h2 { font-size: .95rem; font-weight: 600; color: var(--muted); margin: 0; }
+.place { font-size: 1.75rem; font-weight: 750; letter-spacing: -.03em; line-height: 1.2; margin: .2rem 0 1.2rem; }
+dl { margin: 1.2rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--line); display: grid; gap: .7rem; font-size: .9rem; }
+dt { color: var(--muted); }
+dd { margin: 0; overflow-wrap: anywhere; font-family: ui-monospace, Menlo, monospace; font-size: .85rem; }
+.live { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.live button { margin-left: auto; font: inherit; font-size: .85rem; color: inherit; background: none; border: 1px solid var(--line); border-radius: 999px; padding: .3rem .85rem; cursor: pointer; }
+.live button:hover { border-color: var(--ink); }
+.dot { width: .7rem; height: .7rem; border-radius: 50%; background: var(--sun); }
+.dot.ok { background: #23a26d; } .dot.error { background: var(--coral); }
+
+section { padding-block: 3.5rem; border-top: 1px solid var(--line); }
+section > h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.03em; line-height: 1.15; margin: 0 0 1.8rem; }
+.countries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0; margin: 0; list-style: none; }
+.countries li { background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--c); border-radius: 14px; padding: 1.3rem; }
+.countries strong { display: block; font-size: 1.25rem; letter-spacing: -.02em; }
+.countries span { color: var(--muted); font-size: .92rem; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
+.features h3 { margin: 0 0 .4rem; font-size: 1.12rem; color: var(--green); }
+.features p { margin: 0; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding-block: 1.8rem; color: var(--muted); font-size: .9rem; }
+.notfound { min-height: 70vh; display: grid; place-content: center; justify-items: start; }
+
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; gap: 2.2rem; padding-block: 1.8rem 3rem; }
+  .countries { grid-template-columns: 1fr 1fr; }
+  .features { grid-template-columns: 1fr; gap: 1.6rem; }
+}

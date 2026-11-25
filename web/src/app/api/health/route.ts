@@ -1,8 +1,7 @@
+import { getRegion } from "../../../lib/region";
+
 export const dynamic = "force-dynamic";
 
 export function GET() {
-  return Response.json(
-    { status: "ok", region: process.env.REGION ?? "local" },
-    { headers: { "Cache-Control": "no-store" } },
-  );
+  return Response.json({ status: "ok", region: getRegion() }, { headers: { "Cache-Control": "no-store" } });
 }
