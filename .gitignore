@@ -1,0 +1,50 @@
+# --- Secretos: nunca al repositorio ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*credentials*.json
+*service-account*.json
+*-sa-key.json
+
+# --- Terraform ---
+# .terraform.lock.hcl SI se versiona (fija las versiones de los providers).
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# --- Node / Next.js ---
+# package-lock.json SI se versiona (npm ci lo necesita).
+node_modules/
+.next/
+out/
+coverage/
+next-env.d.ts
+*.tsbuildinfo
+npm-debug.log*
+
+# --- Logs, sistema operativo y editores ---
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# --- Herramientas locales ---
+.claude/settings.local.json
+graphify-out/

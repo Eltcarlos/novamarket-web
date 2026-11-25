@@ -1,0 +1,7 @@
+# Lista blanca: solo entra a la imagen lo que se declara aqui.
+*
+!package.json
+!package-lock.json
+!next.config.ts
+!tsconfig.json
+!src
