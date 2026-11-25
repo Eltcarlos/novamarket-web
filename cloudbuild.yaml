@@ -1,0 +1,50 @@
+# Corre como novamarket-deployer. Regiones en serie: si la primera falla, la
+# segunda conserva la version anterior.
+steps:
+  - id: build
+    name: gcr.io/cloud-builders/docker
+    env: ["DOCKER_BUILDKIT=1"]
+    args:
+      - build
+      - -t
+      - northamerica-south1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA
+      - -t
+      - southamerica-west1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA
+      - web
+
+  - id: push-mexico
+    name: gcr.io/cloud-builders/docker
+    args: [push, "northamerica-south1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA"]
+
+  - id: push-chile
+    name: gcr.io/cloud-builders/docker
+    args: [push, "southamerica-west1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA"]
+
+  - id: deploy-mexico
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update
+      - novamarket-web-northamerica-south1
+      - --project=$PROJECT_ID
+      - --region=northamerica-south1
+      - --image=northamerica-south1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA
+
+  - id: deploy-chile
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update
+      - novamarket-web-southamerica-west1
+      - --project=$PROJECT_ID
+      - --region=southamerica-west1
+      - --image=southamerica-west1-docker.pkg.dev/$PROJECT_ID/novamarket-web/web:$COMMIT_SHA
+
+logsBucket: gs://novamarket-515315-build-logs
+options:
+  logging: GCS_ONLY
+timeout: 1200s

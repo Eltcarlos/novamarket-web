@@ -2,13 +2,21 @@
   "name": "novamarket-web",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/core": "2.12.1",
+    "@opentelemetry/exporter-trace-otlp-proto": "0.223.2",
+    "@opentelemetry/resources": "2.12.1",
+    "@opentelemetry/sdk-trace-base": "2.12.1",
+    "@opentelemetry/sdk-trace-node": "2.12.1",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"

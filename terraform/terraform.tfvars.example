@@ -1,1 +1,2 @@
-project_id = "REEMPLAZAR-project-id"
+project_id             = "REEMPLAZAR-project-id"
+deployer_impersonators = ["user:REEMPLAZAR@empresa.com"]

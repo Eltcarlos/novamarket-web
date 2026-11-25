@@ -45,3 +45,14 @@ variable "enable_nat" {
   type        = bool
   default     = true
 }
+
+variable "deployer_impersonators" {
+  description = "Identidades que pueden impersonar al deployer, p. ej. user:persona@empresa.com."
+  type        = set(string)
+  default     = []
+
+  validation {
+    condition     = alltrue([for m in var.deployer_impersonators : can(regex("^(user|group|serviceAccount):[^@\\s]+@[^@\\s]+$", m))])
+    error_message = "Use user:, group: o serviceAccount: con un correo. No se permiten allUsers ni allAuthenticatedUsers."
+  }
+}
